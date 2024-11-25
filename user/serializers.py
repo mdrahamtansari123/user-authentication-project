@@ -14,7 +14,7 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 
-User = get_user_model()
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
@@ -82,13 +82,13 @@ class Market_UserSerializer(serializers.ModelSerializer):
         read_only_fields = ['price']
 
     def validate_mobile_number(self, value):
-        # Example validation: Ensure mobile number contains only digits and has a length of 10-15
+       
         if not re.match(r'^\d{10,15}$', value):
             raise serializers.ValidationError("Mobile number must contain only digits and be 10 to 15 digits long.")
         return value
     
     def validate_email(self, value):
-        # Use Django's validate_email method to validate the email format
+        
         try:
             validate_email(value)
         except serializers.ValidationError:
